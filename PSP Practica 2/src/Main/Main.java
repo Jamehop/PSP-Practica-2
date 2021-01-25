@@ -7,6 +7,7 @@ public class Main {
 	static TaskManager taskManager;
 	static final int NUM_CONSUMERS = 100;
 	static final int NUM_PRODUCERS = 100;
+	static final int LOOPS=10;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -14,10 +15,10 @@ public class Main {
 		List<Consummer> consummers = new ArrayList<>();
 		List<Producer> producers = new ArrayList<>();
 		for (int i = 0; i < NUM_CONSUMERS; i++) {
-			consummers.add(new Consummer(taskManager));
+			consummers.add(new Consummer(i, taskManager, LOOPS));
 		}
 		for (int i = 0; i < NUM_PRODUCERS; i++) {
-			producers.add(new Producer(taskManager));
+			producers.add(new Producer(i, taskManager, LOOPS));
 		}
 
 		for (Consummer c : consummers) {
