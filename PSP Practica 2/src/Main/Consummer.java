@@ -7,7 +7,7 @@ public class Consummer extends Thread{
 	
 	
 	
-	public Consummer(int id, TaskManager taskmanager, int numLoops) {
+	public Consummer(int id, TaskManager taskManager, int numLoops) {
 		this.taskManager=taskManager;
 		this.id = id;
 		this.numLoops = numLoops;
@@ -16,11 +16,7 @@ public class Consummer extends Thread{
 
 
 	public void run() {
-		taskManager.write(1L);
-		try {
-			wait();
-		}catch(InterruptedException e){
-			e.printStackTrace();
-		}
+		int data= taskManager.consumeTask(id);
+		System.out.println("Consumer [" + this.id + "] >>> consumes: " + data);
 	}
 }

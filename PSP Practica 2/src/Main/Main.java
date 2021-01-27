@@ -7,7 +7,7 @@ public class Main {
 	static TaskManager taskManager;
 	static final int NUM_CONSUMERS = 100;
 	static final int NUM_PRODUCERS = 100;
-	static final int LOOPS=10;
+	static final int LOOPS=100;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -27,5 +27,26 @@ public class Main {
 		for (Producer p : producers) {
 			p.start();
 		}
+		//join bloquea el subproceso hasta que los hilos finalizan su proceso
+		for (Consummer c : consummers) {
+			try { 
+				c.join(); 
+				}
+			catch(Exception e) {
+				System.out.println(e);
+			}
+		}
+
+		for (Producer p : producers) {
+			try {
+				p.join(); 
+				}
+			catch(Exception e) {
+				System.out.println(e);
+			}
+		}
+
+		System.out.println("Tareas restantes: " + taskManager.listaTareas.size());
+		System.out.println("THE END");
 	}
 }
